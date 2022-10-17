@@ -36,11 +36,21 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
         return
     """ assumption: hide is True only at the start of the game;card revelead doesnt matter """
     if hide: 
-        print("h: ",h)
-        
         print('Dealer has: %d %s = %s' %(d[0],"?", "?")) 
         print('Player has: %s %s = %s'%(h[0], h[1], h_score)) 
-
+    else:
+        if d != []:
+            d_cards = 'Dealer has: '
+            for i in range(len(d)): 
+            		d_cards += str(d[i]) + ' ' 
+            d_cards += '= ' + str(d_score) + '\n'
+        if h != []:
+            h_cards = 'Player has: '
+            for i in range(len(h)):
+                h_cards += str(h[i]) + ' '
+            h_cards += '= ' + str(d_score) + '\n'
+        if d != [ ]: print(d_cards)
+        if h != [ ]: print(h_cards)
 
 
 def startGame(root=None):
