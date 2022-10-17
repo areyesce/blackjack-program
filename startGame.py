@@ -1,6 +1,6 @@
 import random
-# Online Python - IDE, Editor, Compiler, Interpreter
 
+# LAST LEFT OFF TRYING TO SEE WHY INPUT 'S' DOES NOT FUNCTION
 def createDeck():
     deck = []
     for _ in range(4):
@@ -21,6 +21,7 @@ def generateRandomCard(deck):
 
 def displayHands(h, d, h_score, d_score, stand=None, hide=False):
     if stand:
+        print("stand == 'Player'")
         if stand == 'Player':
             h_cards = 'Player stands with: '
             for i in range(len(h)): 
@@ -111,6 +112,7 @@ def startGame(root=None):
 	    
 	    if human_turn:
 	        user_input = input("Would you like to (H)it or (S)tand?")
+	        print("user_input: ",user_input)
 	        #TODO: add validity checks for user_input
 	        if user_input == 'H':
 	            if root:
@@ -119,19 +121,19 @@ def startGame(root=None):
 	            else: deck, card = generateRandomCard(deck)
 	            human_hand.append(card)
 	            human_score = scoreHand(human_hand)
-	            print("new human score:",human_score)
 	            displayHands(human_hand, dealer_hand, human_score, dealer_score)
 	            if human_score >= 21: 	# (check if busted) 
 	                human_turn, dealer_turn = False, True
 	                winner, gameNotOver = "dealer", False
 	                break
 	        elif user_input == 'S':
+	            print(" user_input == 'S'")
 	            human_turn, dealer_turn = False, True
-	            displayHands(human_hand, dealer_hand, human_score, dealer_score,hide=dealer_card_hidden)
+	            displayHands(human_hand, dealer_hand, human_score, dealer_score,stand='Player',hide=dealer_card_hidden)
            
         
     
 # startGame()
-startGame(root=1)
+# startGame(root=1)
 # startGame(root=2)
-# startGame(root=3)
+startGame(root=3)
