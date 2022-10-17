@@ -86,7 +86,7 @@ def startGame(root=None):
     if dealer_card_hidden:
         displayHands(human_hand, dealer_hand, human_score, '?',hide=True)
     else:
-        displayHands(human_hand, dealer_hand, human_score, dealer_score, hide=True)
+        displayHands(human_hand, dealer_hand, human_score, dealer_score)
         
 	
 
