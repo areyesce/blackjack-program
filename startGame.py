@@ -9,14 +9,14 @@ def createDeck():
     return deck
 
 def generateRandomCard(deck):
-	print("DECK!!!!: ",deck)
-	print("TYPE: ",type(deck))
+# 	print("DECK!!!!: ",deck)
+# 	print("TYPE: ",type(deck))
 	card = random.choice(deck)
-	print("RANDOM CARD:",card)
+# 	print("RANDOM CARD:",card)
 	
 	if card in deck:
 	    deck.remove(card)
-	print("NEW DECK!!!!: ",deck) 
+# 	print("NEW DECK!!!!: ",deck) 
 	return deck, card
 
 def displayHands(h, d, h_score, d_score, stand=None, hide=False):
@@ -48,7 +48,7 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
             h_cards = 'Player has: '
             for i in range(len(h)):
                 h_cards += str(h[i]) + ' '
-            h_cards += '= ' + str(d_score) + '\n'
+            h_cards += '= ' + str(h_score) + '\n'
         if d != [ ]: print(d_cards)
         if h != [ ]: print(h_cards)
 
@@ -58,9 +58,9 @@ def scoreHand(hand):
     total = 0
     total_aces, poss_values = 0, [ ]
     for card in hand:
-        if card in number_cards:
+        if card in list(number_cards):
             total += card
-        elif card in face_cards:
+        elif card in list(face_cards):
             total += 10
         elif card == "A":
             total_aces += 1
@@ -108,20 +108,27 @@ def startGame(root=None):
         
     while gameNotOver:
 	    """ 3. Prompt user (Hit or Stand?) until player has stood, won, or busted"""
+	    
 	    if human_turn:
 	        user_input = input("Would you like to (H)it or (S)tand?")
 	        #TODO: add validity checks for user_input
 	        if user_input == 'H':
-	            deck, card = generateRandomCard(deck)
+	            if root:
+	                saved = cards.pop(0)
+	                card = saved[0]
+	            else: deck, card = generateRandomCard(deck)
 	            human_hand.append(card)
 	            human_score = scoreHand(human_hand)
+	            print("new human score:",human_score)
 	            displayHands(human_hand, dealer_hand, human_score, dealer_score)
 	            if human_score >= 21: 	# (check if busted) 
 	                human_turn, dealer_turn = False, True
 	                winner, gameNotOver = "dealer", False
-	                print("break")
 	                break
-
+	        elif user_input == 'S':
+	            human_turn, dealer_turn = False, True
+	            displayHands(human_hand, dealer_hand, human_score, dealer_score,hide=dealer_card_hidden)
+           
         
     
 # startGame()
