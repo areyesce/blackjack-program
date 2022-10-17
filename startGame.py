@@ -106,10 +106,22 @@ def startGame(root=None):
     else:
         displayHands(human_hand, dealer_hand, human_score, dealer_score)
         
-	
-    
-        
-    
+    while gameNotOver:
+	    """ 3. Prompt user (Hit or Stand?) until player has stood, won, or busted"""
+	    if human_turn:
+	        user_input = input("Would you like to (H)it or (S)tand?")
+	        #TODO: add validity checks for user_input
+	        if user_input == 'H':
+	            deck, card = generateRandomCard(deck)
+	            human_hand.append(card)
+	            human_score = scoreHand(human_hand)
+	            displayHands(human_hand, dealer_hand, human_score, dealer_score)
+	            if human_score >= 21: 	# (check if busted) 
+	                human_turn, dealer_turn = False, True
+	                winner, gameNotOver = "dealer", False
+	                print("break")
+	                break
+
         
     
 # startGame()
