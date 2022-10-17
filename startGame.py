@@ -36,8 +36,10 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
         return
     """ assumption: hide is True only at the start of the game;card revelead doesnt matter """
     if hide: 
+        print("h: ",h)
+        
         print('Dealer has: %d %s = %s' %(d[0],"?", "?")) 
-        print('Player has: %d %d = %d'%(h[0], h[1], h[0]+h[1])) 
+        print('Player has: %s %s = %s'%(h[0], h[1], h_score)) 
 
 
 
@@ -56,18 +58,18 @@ def startGame(root=None):
     deck = createDeck()
     human_turn, dealer_turn = True, False
     gameNotOver, winner = True,None
-    human_score, dealer_score = 0, 0
     
     """ 1. Deal initial cards (two cards to each player) """
     human_hand, dealer_hand = [],[]
     if root:
         rootCard = cards.pop(0)
-        human_hand, dealer_hand = rootCard[0], rootCard[1]
+        dealer_hand, human_hand = rootCard[0], rootCard[1]
     else:
         for hand in [human_hand, dealer_hand]:
     	    for _ in range(2):
     	        deck, card = generateRandomCard(deck)
     	        hand.append(card)
+    human_score, dealer_score = 0, 0
     
     """ 2. Display initial hands (hiding dealer"s second card and score) """
     dealer_card_hidden = True
