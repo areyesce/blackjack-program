@@ -36,7 +36,7 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
         return
     """ assumption: hide is True only at the start of the game;card revelead doesnt matter """
     if hide: 
-        print('Dealer has: %d %s = %s' %(d[0],"?", "?")) 
+        print('Dealer has: %s %s = %s' %(str(d[0]),"?", "?")) 
         print('Player has: %s %s = %s'%(h[0], h[1], h_score)) 
     else:
         if d != []:
@@ -52,6 +52,24 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
         if d != [ ]: print(d_cards)
         if h != [ ]: print(h_cards)
 
+def scoreHand(hand):
+    number_cards = {2, 3, 4, 5, 6, 7, 8, 9, 10}
+    face_cards = {"J", "Q", "K"}
+    total = 0
+    total_aces, poss_values = 0, [ ]
+    for card in hand:
+        if card in number_cards:
+            total += card
+        elif card in face_cards:
+            total += 10
+        elif card == "A":
+            total_aces += 1
+    if total_aces > 0:  
+        pass
+		# TODO: might have to do permutations? to present optimal value
+		# find least difference to 17 && < 21
+		# if total w one permutation == 21 return	
+    return total
 
 def startGame(root=None):
     """ Based on given examples-> {1: dealer wins, 2: blackjack, 3: player wins} """ 
@@ -79,7 +97,7 @@ def startGame(root=None):
     	    for _ in range(2):
     	        deck, card = generateRandomCard(deck)
     	        hand.append(card)
-    human_score, dealer_score = 0, 0
+    human_score, dealer_score = scoreHand(human_hand), scoreHand(dealer_hand)
     
     """ 2. Display initial hands (hiding dealer"s second card and score) """
     dealer_card_hidden = True
@@ -89,7 +107,7 @@ def startGame(root=None):
         displayHands(human_hand, dealer_hand, human_score, dealer_score)
         
 	
-
+    
         
     
         
