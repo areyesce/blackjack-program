@@ -45,6 +45,7 @@ def startGame(root=None):
     else:
         displayHands(human_hand, dealer_hand, human_score, dealer_score)
     print("$$$$$$$$$$$$$")
+    if root == 2: human_score = 21 #TODO: remove after testing
     if human_score == 21:
         print("Player wins!\nBlackJack!")
         return
@@ -84,4 +85,5 @@ def startGame(root=None):
 # startGame(root=1)
 
 startGame(root=2)
+print("************** NAVIDAD")
 # startGame(root=3)
