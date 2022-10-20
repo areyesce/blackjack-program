@@ -9,11 +9,18 @@ def startGame(root=None):
     exampleCards= {1: [ [ [3, '?'] , [6, 9] ],[10]], 2:[[[3,'?'] ,[10, "A"]]],3:[[['K', 4],["A",5]],[4],["A"],[2]]}
     
     if root:
-        moves = exampleMoves[root]
-        cards = exampleCards[root]
-        # print("Root: ",root)
-        # print("Moves:",moves)
-        # print("Cards:",cards)
+        print("Root: ",root)
+        if exampleMoves[root] != []: 
+            moves = exampleMoves[root]
+            print("Moves:",moves)
+        else: moves = ['*']
+        if exampleCards[root] != []: 
+            cards = exampleCards[root]
+            print("Cards:",cards)
+        else: cards = [None,None]
+        
+        
+        
         
     deck = createDeck()
     human_turn, dealer_turn = True, False
@@ -37,6 +44,11 @@ def startGame(root=None):
         displayHands(human_hand, dealer_hand, human_score, '?',hide=True)
     else:
         displayHands(human_hand, dealer_hand, human_score, dealer_score)
+    print("$$$$$$$$$$$$$")
+    if human_score == 21:
+        print("Player wins!\nBlackJack!")
+        return
+    
         
     while gameNotOver:
 	    """ 3. Prompt user (Hit or Stand?) until player has stood, won, or busted"""
@@ -44,12 +56,15 @@ def startGame(root=None):
 	    if human_turn:
 	        if not root:
 	            user_input = input("Would you like to (H)it or (S)tand?")
-	        if root: user_input = moves.pop(0)
+	        if root: 
+	            if moves: user_input = moves.pop(0)
 	        print("POPPED USER INPUT: ",user_input)
 	        if user_input == 'H':
+	            print("*************")
 	            if root:
 	                saved = cards.pop(0)
 	                card = saved[0]
+	                print("saved = cards.pop(0)", card)
 	            else: deck, card = generateRandomCard(deck)
 	            human_hand.append(card)
 	            human_score = scoreHand(human_hand)
@@ -67,6 +82,6 @@ def startGame(root=None):
     
 # startGame()
 # startGame(root=1)
-# startGame(root=2)
-print("HELLO")
-startGame(root=3)
+
+startGame(root=2)
+# startGame(root=3)
