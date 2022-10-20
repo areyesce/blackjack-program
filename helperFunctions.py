@@ -46,3 +46,22 @@ def displayHands(h, d, h_score, d_score, stand=None, hide=False):
             h_cards += '= ' + str(h_score) + '\n'
         if d != [ ]: print(d_cards)
         if h != [ ]: print(h_cards)
+
+def scoreHand(hand):
+    number_cards = {2, 3, 4, 5, 6, 7, 8, 9, 10}
+    face_cards = {"J", "Q", "K"}
+    total = 0
+    total_aces, poss_values = 0, [ ]
+    for card in hand:
+        if card in list(number_cards):
+            total += card
+        elif card in list(face_cards):
+            total += 10
+        elif card == "A":
+            total_aces += 1
+    if total_aces > 0:  
+        pass
+		# TODO: might have to do permutations? to present optimal value
+		# find least difference to 17 && < 21
+		# if total w one permutation == 21 return	
+    return total
