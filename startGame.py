@@ -2,6 +2,7 @@ import random
 from helperFunctions import *
 
 # LAST LEFT OFF TRYING TO SEE WHY INPUT 'S' DOES NOT FUNCTION
+
 def startGame(root=None):
     """ Based on given examples-> {1: dealer wins, 2: blackjack, 3: player wins} """ 
     exampleMoves= {1: [ "H" ], 2: [ ], 3: [ "H", "S", "H", "H", "S" ]}
@@ -30,7 +31,6 @@ def startGame(root=None):
     	        hand.append(card)
     human_score, dealer_score = scoreHand(human_hand), scoreHand(dealer_hand)
 
-    
     """ 2. Display initial hands (hiding dealer"s second card and score) """
     dealer_card_hidden = True
     if dealer_card_hidden:
@@ -42,9 +42,10 @@ def startGame(root=None):
 	    """ 3. Prompt user (Hit or Stand?) until player has stood, won, or busted"""
 	    
 	    if human_turn:
-	        user_input = input("Would you like to (H)it or (S)tand?")
-	        print("user_input: ",user_input)
-	        #TODO: add validity checks for user_input
+	        if not root:
+	            user_input = input("Would you like to (H)it or (S)tand?")
+	        if root: user_input = moves.pop(0)
+	        print("POPPED USER INPUT: ",user_input)
 	        if user_input == 'H':
 	            if root:
 	                saved = cards.pop(0)
