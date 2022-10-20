@@ -2,26 +2,6 @@ import random
 from helperFunctions import *
 
 # LAST LEFT OFF TRYING TO SEE WHY INPUT 'S' DOES NOT FUNCTION
-
-def scoreHand(hand):
-    number_cards = {2, 3, 4, 5, 6, 7, 8, 9, 10}
-    face_cards = {"J", "Q", "K"}
-    total = 0
-    total_aces, poss_values = 0, [ ]
-    for card in hand:
-        if card in list(number_cards):
-            total += card
-        elif card in list(face_cards):
-            total += 10
-        elif card == "A":
-            total_aces += 1
-    if total_aces > 0:  
-        pass
-		# TODO: might have to do permutations? to present optimal value
-		# find least difference to 17 && < 21
-		# if total w one permutation == 21 return	
-    return total
-
 def startGame(root=None):
     """ Based on given examples-> {1: dealer wins, 2: blackjack, 3: player wins} """ 
     exampleMoves= {1: [ "H" ], 2: [ ], 3: [ "H", "S", "H", "H", "S" ]}
@@ -50,6 +30,7 @@ def startGame(root=None):
     	        hand.append(card)
     human_score, dealer_score = scoreHand(human_hand), scoreHand(dealer_hand)
 
+    
     """ 2. Display initial hands (hiding dealer"s second card and score) """
     dealer_card_hidden = True
     if dealer_card_hidden:
