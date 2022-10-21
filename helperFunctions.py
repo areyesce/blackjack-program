@@ -1,4 +1,6 @@
 import random
+from itertools import permutations
+
 def createDeck():
     deck = []
     for _ in range(4):
@@ -60,6 +62,21 @@ def scoreHand(hand):
         elif card == "A":
             total_aces += 1
     if total_aces > 0:  
+        poss_permutations = []
+        total_ones = [poss_permutations.append(1) for _ in range(total_aces)]
+        total_elevens = [poss_permutations.append(11) for _ in range(total_aces)]
+        poss_combos = list(permutations(poss_permutations,total_aces))
+        poss_values = [sum(list(x)) for x in poss_combos]
+        poss_sums = [int(x)+total for x in poss_values]
+        print("POSS VALUES: ",poss_values)
+        print("POSS SUMS: ",poss_sums)
+        least_difference = {}
+        for s in poss_sums:
+            difference = abs(s-17)
+            least_difference[difference] = s
+        closest_to_17 = least_difference[min(list(least_difference.keys()))]
+        print("closest: ",closest_to_17)
+        return closest_to_17
         pass
 		# TODO: might have to do permutations? to present optimal value
 		# find least difference to 17 && < 21
