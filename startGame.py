@@ -73,6 +73,7 @@ def startGame(root=None):
 	            if human_score >= 21: 	# (check if busted) 
 	                human_turn, dealer_turn = False, True
 	                winner, gameNotOver = "dealer", False
+	                print("Player busts with: ",human_score)
 	                break
 	        elif user_input == 'S':
 	            print(" user_input == 'S'")
@@ -84,6 +85,6 @@ def startGame(root=None):
 # startGame()
 # startGame(root=1)
 
-startGame(root=2)
+# startGame(root=2)
 print("************** ")
-# startGame(root=3)
+startGame(root=3)
