@@ -70,12 +70,20 @@ def scoreHand(hand):
         poss_sums = [int(x)+total for x in poss_values]
         print("POSS VALUES: ",poss_values)
         print("POSS SUMS: ",poss_sums)
+        if 21 in poss_sums:
+            return 21
         least_difference = {}
         for s in poss_sums:
             difference = abs(s-17)
             least_difference[difference] = s
-        closest_to_17 = least_difference[min(list(least_difference.keys()))]
+        
+        min_key = min(list(least_difference.keys()))
+        closest_to_17 = least_difference[min_key]
         print("closest: ",closest_to_17)
+        while closest_to_17 > 21:
+            del least_difference[min_key]
+            min_key = min(list(least_difference.keys()))
+            closest_to_17 = least_difference[min_key]
         return closest_to_17
         pass
 		# TODO: might have to do permutations? to present optimal value
